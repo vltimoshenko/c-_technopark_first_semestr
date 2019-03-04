@@ -1,1 +1,1 @@
-# c-c-_technopark_first_semestr
+# c/c++_technopark_first_semestr
