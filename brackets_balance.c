@@ -169,7 +169,7 @@ char **read_array_from_stdin(size_t *size) {
   int multiplicator = DEFAULT_MULT;
   int allocation_error = false;
 
-  while (fgets(buffer, BUFFERSIZE, stdin) && buffer[0] != '\n') {
+  while (fgets(buffer, BUFFERSIZE, stdin)) {
     if (i == string_array_size - 1) {
       string_array_size *= 2;
       char **new_arr =
@@ -192,7 +192,7 @@ char **read_array_from_stdin(size_t *size) {
       }
     }
 
-    if (strlen(buffer) != BUFFERSIZE - 1) {
+    if (strlen(buffer) != BUFFERSIZE - 1 || buffer[strlen(buffer) - 1] == '\n') {
       strcat(arr[i], buffer);
       if (arr[i][strlen(arr[i]) - 1] == '\n')
         arr[i][strlen(arr[i]) - 1] = '\0';
