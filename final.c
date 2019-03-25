@@ -172,7 +172,7 @@ char **read_array_from_input(FILE *stream, size_t *size) {
   char buffer[BUFFERSIZE] = {0};
   int string_array_it = 0;
   int it_previous = NONE;
-  size_t new_str_size = 2 * BUFFERSIZE;
+  size_t new_str_size = MULTIPLIER * BUFFERSIZE;
   _Bool allocation_error = false;
 
   while (fgets(buffer, BUFFERSIZE, stream)) {
@@ -194,7 +194,7 @@ char **read_array_from_input(FILE *stream, size_t *size) {
       strcat(arr[string_array_it], buffer);
       if (arr[string_array_it][strlen(arr[string_array_it]) - 1] == '\n')
         arr[string_array_it][strlen(arr[string_array_it]) - 1] = '\0';
-      new_str_size = 2 * BUFFERSIZE;
+      new_str_size = MULTIPLIER * BUFFERSIZE;
       ++string_array_it;
     } else {
       char *p_arr_new = (char *)realloc(arr[string_array_it], new_str_size);
@@ -418,19 +418,19 @@ void found_close_bracket(char **result_string, stack_t *stack, char *substring,
     string_from_pop = pop(stack);
     if (!string_from_pop) {
       *error_flag = TRUE;
-      break;  //or no need?
+      break;
     }
     strcat(*result_string, string_from_pop);
 
     free(string_from_get_top);
     free(string_from_pop);
   }
-  free(string_from_get_top); //or check
+  free(string_from_get_top);
 
   string_from_pop = pop(stack);
   if (!string_from_pop) *error_flag = TRUE;
 
-  free(string_from_pop); //
+  free(string_from_pop);
   substring_it = 0;
 }
 
